@@ -1,5 +1,7 @@
 package com.bookstore.web;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,4 +53,11 @@ public class BookController {
         return "redirect:../booklist"; // return to booklist
     }
 
+    // edit book
+    @RequestMapping(value = "/editbook/{id}")
+    public String editBook(@PathVariable("id") Long bookId, Model model) {
+        Optional<Book> b = repository.findById(bookId);
+        model.addAttribute("book", b);
+        return "editbook"; // editbook.html
+    }
 }
