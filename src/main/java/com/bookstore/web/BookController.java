@@ -19,12 +19,6 @@ public class BookController {
         this.repository = repository;
     }
 
-    // http://localhost:8080/index
-    @RequestMapping(value = { "/index" })
-    public String getFrontPage(Model model) {
-        return "index"; // index.html
-    }
-
     // http://localhost:8080/booklist
     @RequestMapping(value = { "/", "/booklist" })
     public String getBooks(Model model) {
@@ -33,21 +27,21 @@ public class BookController {
     }
 
     // http://localhost:8080/addbook
-    @RequestMapping(value = { "/addbook" })
+    @RequestMapping(value = "/addbook")
     public String addBook(Model model) {
         model.addAttribute("book", new Book());
         return "addbook"; // addbook.html
     }
 
     // save book to database
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(Book book) {
+    @RequestMapping(value = "/savebook", method = RequestMethod.POST)
+    public String saveBook(Book book) {
         repository.save(book);
         return "redirect:booklist"; // return to booklist
     }
 
     // remove book from database
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/deletebook/{id}", method = RequestMethod.GET)
     public String removeBook(@PathVariable("id") Long bookId, Model model) {
         repository.deleteById(bookId);
         return "redirect:../booklist"; // return to booklist
