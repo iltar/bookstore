@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.bookstore.domain.Book;
 import com.bookstore.domain.Category;
 import com.bookstore.domain.CategoryRepository;
 
@@ -43,5 +42,5 @@ public class CategoryController {
         repository.deleteById(categoryId);
         return "redirect:../categorylist";
     }
-    
+
 }

@@ -20,13 +20,15 @@ public class BookstoreApplication {
 	@Bean
 	public CommandLineRunner demo(BookRepository br, CategoryRepository cr) {
 		return (args) -> {
-			cr.save(new Category("Fantasy"));
-			cr.save(new Category("Contemporary"));
+			Category c1 = new Category("Fantasy");
+			Category c2 = new Category("Contemporary");
+			cr.save(c1);
+			cr.save(c2);
 
 			br.save(new Book("The Night Circus", "Erin Morgernstern", 
-			2012, "978-0-099-55479-0", 16.95));
+			2012, "978-0-099-55479-0", 16.95, c1));
 			br.save(new Book("Loveless", "Alice Oseman", 
-			2020, "978-0-00-824412-5", 16.95));
+			2020, "978-0-00-824412-5", 16.95, c2));
 		};
 	}
 
