@@ -6,7 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.bookstore.domain.Book;
-import com.bookstore.domain.BookRepository;;
+import com.bookstore.domain.BookRepository;
+import com.bookstore.domain.Category;
+import com.bookstore.domain.CategoryRepository;;
 
 @SpringBootApplication
 public class BookstoreApplication {
@@ -16,12 +18,14 @@ public class BookstoreApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(BookRepository repository) {
+	public CommandLineRunner demo(BookRepository br, CategoryRepository cr) {
 		return (args) -> {
-			repository.save(new Book("The Night Circus", "Erin Morgernstern", 
+			br.save(new Book("The Night Circus", "Erin Morgernstern", 
 			2012, "978-0-099-55479-0", 16.95));
-			repository.save(new Book("Loveless", "Alice Oseman", 
+			br.save(new Book("Loveless", "Alice Oseman", 
 			2020, "978-0-00-824412-5", 16.95));
+			cr.save(new Category("Fantasy"));
+			cr.save(new Category("Contemporary"));
 		};
 	}
 
