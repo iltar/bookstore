@@ -22,7 +22,7 @@ public class Book {
     private double price;
 
     @ManyToOne
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "categoryid")
     private Category category;
 
     public Book() {

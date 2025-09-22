@@ -4,7 +4,7 @@
 <head>
     <title>Bookstore</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" /> 
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
 </head>
 
 <body>
@@ -15,6 +15,11 @@
             <input type="text" id="title" th:field="*{title}" />
             <label for="author">Author</label>
             <input type="text" id="author" th:field="*{author}" />
+            <label for="catlist">Category</label>
+            <select id="catlist" th:field="*{category.categoryid}">
+                <option th:each="cat : ${categories}" th:value="${cat.categoryid}" th:text="${cat.name}">
+                </option>
+            </select>
             <label for="year">Publication year</label>
             <input type="text" id="year" th:field="*{publicationYear}" />
             <label for="isbn">ISBN</label>

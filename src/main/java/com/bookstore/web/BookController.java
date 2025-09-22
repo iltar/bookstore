@@ -2,6 +2,7 @@ package com.bookstore.web;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,10 +11,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.bookstore.domain.Book;
 import com.bookstore.domain.BookRepository;
+import com.bookstore.domain.CategoryRepository;
 
 @Controller
 public class BookController {
+    @Autowired
     private BookRepository repository;
+
+    @Autowired
+    private CategoryRepository cr;
 
     public BookController(BookRepository repository) {
         this.repository = repository;
@@ -30,6 +36,7 @@ public class BookController {
     @RequestMapping(value = "/addbook")
     public String addBook(Model model) {
         model.addAttribute("book", new Book());
+        model.addAttribute("categories", cr.findAll());
         return "addbook"; // addbook.html
     }
 
@@ -52,6 +59,7 @@ public class BookController {
     public String editBook(@PathVariable("id") Long bookId, Model model) {
         Optional<Book> b = repository.findById(bookId);
         model.addAttribute("book", b);
+        model.addAttribute("categories", cr.findAll());
         return "editbook"; // editbook.html
     }
 }
